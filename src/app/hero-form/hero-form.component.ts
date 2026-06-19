@@ -16,12 +16,32 @@ export class HeroFormComponent {
     private bootstrapLink?: HTMLLinkElement;
 
   ngOnInit() {
+    var newDiv = document.createElement("div");
+    newDiv.innerHTML = `<style>body {
+    margin: 2em;
+    margin-bottom: 32px;
+    margin-left: 32px;
+    margin-right: 32px;
+    margin-top: 32px;
+    }
+    h1 {
+    font-size: 40px;
+    height: 46px;
+    line-height: 1.15;
+    }
+    a {
+    font-size: 16px;
+    line-height: 1.17;
+    }
+    </style>`;
+    document.body.appendChild(newDiv);
     this.bootstrapLink = document.createElement('link');
     this.bootstrapLink.rel = 'stylesheet';
     this.bootstrapLink.href =
       'https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css';
 
     document.head.appendChild(this.bootstrapLink);
+
   }
 
   ngOnDestroy() {
@@ -58,7 +78,7 @@ export class HeroFormComponent {
   //////// NOT SHOWN IN DOCS ////////
 
   // Reveal in html:
-  //   Name via form.controls = {{showFormControls(heroForm)}}
+  //   Name via form./controls = {{showFormControls(heroForm)}}
   showFormControls(form: any) {
     return form && form.controls.name &&
     form.controls.name.value; // Dr. IQ
