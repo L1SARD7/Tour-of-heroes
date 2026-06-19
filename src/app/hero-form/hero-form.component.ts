@@ -55,17 +55,15 @@ export class HeroFormComponent {
 
   submitted = false;
 
-  onSubmit() { this.submitted = true;
+  onSubmit() { this.submitted = true }
+
+  newHero() { this.submitted = true;
         this.heroService.addHero({ name: this.model.name, alterEgo: this.model.alterEgo, power: this.model.power } as Hero)
           .subscribe(hero => {
           this.heroes.push(hero);
         })
+        this.submitted = false
    }
-
-
-  newHero() {
-      this.model = new Hero(42, '', '');
-  }
 
   skyDog(): Hero {
     const myHero =  new Hero(42, 'SkyDog',
@@ -75,22 +73,8 @@ export class HeroFormComponent {
     return myHero;
   }
 
-  //////// NOT SHOWN IN DOCS ////////
-
-  // Reveal in html:
-  //   Name via form./controls = {{showFormControls(heroForm)}}
   showFormControls(form: any) {
     return form && form.controls.name &&
     form.controls.name.value; // Dr. IQ
   }
-
-  /////////////////////////////
-
 }
-
-
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
-*/

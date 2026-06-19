@@ -34,12 +34,6 @@
       </div>
 
       <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
-      <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">New Hero</button>
-      <i>with</i> reset
-
-      &nbsp;&nbsp;
-      <button type="button" class="btn btn-default" (click)="newHero()">New Hero</button>
-      <i>without</i> reset
 
      <!-- NOT SHOWN IN DOCS -->
       <div>
@@ -66,17 +60,11 @@
     </div>
     <br>
     <button type="button" class="btn btn-primary" (click)="submitted=false">Edit</button>
+    <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">Create New Hero</button>
+    <button type="button" class="btn btn-cancel" (click)="submitted=false; heroForm.reset()">Cancel</button>
+
   </div>
 </div>
-
-<!-- ====================================================  -->
-  <div>
-    <form>
-
-       <!-- ... all of the form ... -->
-
-    </form>
-  </div>
 
 <!-- ====================================================  -->
 <hr>
@@ -89,75 +77,3 @@
   border-left: 1px  solid #CCC
 }
 </style>
-<div class="no-style" style="margin-left: 4px">
-  <div class="container">
-      <h1>Hero Form</h1>
-      <form>
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" required>
-        </div>
-
-        <div class="form-group">
-          <label for="alterEgo">Alter Ego</label>
-          <input type="text" class="form-control" id="alterEgo">
-        </div>
-
-        <div class="form-group">
-          <label for="power">Hero Power</label>
-          <select class="form-control" id="power" required>
-            <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-          </select>
-        </div>
-
-        <button type="submit" class="btn btn-success">Submit</button>
-
-      </form>
-  </div>
-
-  <!-- ====================================================  -->
-  <hr>
-  <div class="container">
-      <h1>Hero Form</h1>
-      <form #heroForm="ngForm">
-        {{ model | json }}
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name"
-                 required
-                 [(ngModel)]="model.name" name="name">
-        </div>
-
-        <div class="form-group">
-          <label for="alterEgo">Alter Ego</label>
-          <input type="text"  class="form-control" id="alterEgo"
-                 [(ngModel)]="model.alterEgo" name="alterEgo">
-        </div>
-
-        <div class="form-group">
-          <label for="power">Hero Power</label>
-          <select class="form-control"  id="power"
-                  required
-                  [(ngModel)]="model.power" name="power">
-            <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-          </select>
-        </div>
-
-        <button type="submit" class="btn btn-success">Submit</button>
-
-      </form>
-  </div>
-
-  <!-- EXTRA MATERIAL FOR DOCUMENTATION -->
-  <hr>
-    <input type="text" class="form-control" id="name"
-           required
-           [(ngModel)]="model.name" name="name">
-    TODO: remove this: {{model.name}}
-  <hr>
-    <input type="text" class="form-control" id="name"
-           required
-           [ngModel]="model.name" name="name"
-           (ngModelChange)="model.name = $event">
-    TODO: remove this: {{model.name}}
-</div>
