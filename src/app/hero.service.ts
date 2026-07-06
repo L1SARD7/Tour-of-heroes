@@ -79,7 +79,7 @@ export class HeroService {
     if (!term.trim()) {
       return of([]);
     }
-    return this.http.get<Hero[]>(`${this.apiUrl}/?name=${term}`).pipe(
+    return this.http.get<Hero[]>(`${this.apiUrl}/heroes/?name=${term}`).pipe(
       tap(x => x.length ?
         this.log(`found heroes matching "${term}"`) :
         this.log(`no heroes matching "${term}"`)),
