@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Hero } from '../hero';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -10,6 +10,7 @@ import { HeroService } from '../hero.service';
   templateUrl: './hero-detail.component.html',
   styleUrls: ['./hero-detail.component.less']
 })
+
 export class HeroDetailComponent {
   @Input() hero?: Hero
   constructor(

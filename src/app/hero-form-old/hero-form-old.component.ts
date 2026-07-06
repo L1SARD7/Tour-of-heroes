@@ -2,29 +2,16 @@ import { Component } from '@angular/core';
 import { HeroService } from '../hero.service';
 
 import { Hero } from '../hero';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-
 @Component({
-  selector: 'app-hero-form',
-  templateUrl: './hero-form.component.html',
-  styleUrls: ['./hero-form.component.less'],
+  selector: 'app-hero-form-old',
+  templateUrl: './hero-form-old.component.html',
+  styleUrls: ['./hero-form-old.component.less']
 })
+export class HeroFormOldComponent {
 
-export class HeroFormComponent {
-  heroForm = new FormGroup({
-    name: new FormControl(),
-    power: new FormControl(),
-    alterEgo: new FormControl()
-  });
-  
-  
   heroes: Hero[] = [];
 
-  
-
-  constructor(private heroService: HeroService,
-    private formBuilder: FormBuilder
-  ) { }
+  constructor(private heroService: HeroService) { }
     private bootstrapLink?: HTMLLinkElement;
 
   ngOnInit() {
@@ -53,13 +40,6 @@ export class HeroFormComponent {
       'https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css';
 
     document.head.appendChild(this.bootstrapLink);
-
-    this.heroForm = this.formBuilder.group({
-      name: [],
-      power: [],
-      alterEgo: []
-    })
-
   }
 
   ngOnDestroy() {
@@ -76,7 +56,7 @@ export class HeroFormComponent {
   onSubmit() { this.submitted = true }
 
   newHero() { this.submitted = true;
-        this.heroService.addHero({ name: this.heroForm.value.name, alterEgo: this.heroForm.value.alterEgo, power: this.heroForm.value.power} as Hero)
+        this.heroService.addHero({ name: this.model.name, alterEgo: this.model.alterEgo, power: this.model.power } as Hero)
           .subscribe(hero => {
           this.heroes.push(hero);
         })
