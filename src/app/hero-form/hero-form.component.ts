@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChange } from '@angular/core';
 import { HeroService } from '../hero.service';
 
 import { Hero } from '../hero';
@@ -11,6 +11,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 
 export class HeroFormComponent {
+  
   heroForm = new FormGroup({
     name: new FormControl(),
     power: new FormControl(),
@@ -19,8 +20,6 @@ export class HeroFormComponent {
   
   
   heroes: Hero[] = [];
-
-  
 
   constructor(private heroService: HeroService,
     private formBuilder: FormBuilder
@@ -54,22 +53,20 @@ export class HeroFormComponent {
 
     document.head.appendChild(this.bootstrapLink);
 
-    this.heroForm = this.formBuilder.group({
-      name: [],
-      power: [],
-      alterEgo: []
-    })
+    // this.heroForm = this.formBuilder.group({
+    //   name: [],
+    //   power: [],
+    //   alterEgo: []
+    // })
 
   }
 
-  ngOnDestroy() {
-    this.bootstrapLink?.remove();
+  resetForm() {
+    this.heroForm.reset();
   }
 
   powers = ['Really Smart', 'Super Flexible',
             'Super Hot', 'Weather Changer'];
-
-  model = new Hero(18, 'Dr. IQ', this.powers[0], 'Chuck Overstreet');
 
   submitted = false;
 
@@ -82,14 +79,6 @@ export class HeroFormComponent {
         })
         this.submitted = false
    }
-
-  skyDog(): Hero {
-    const myHero =  new Hero(42, 'SkyDog',
-                           'Fetch any object at any distance',
-                           'Leslie Rollover');
-    console.log('My hero is called ' + myHero.name); 
-    return myHero;
-  }
 
   showFormControls(form: any) {
     return form && form.controls.name &&

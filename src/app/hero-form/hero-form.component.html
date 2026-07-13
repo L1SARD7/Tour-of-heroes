@@ -2,7 +2,7 @@
   <div [hidden]="submitted">
     <a routerLink="/hero-form-old">Template Driven Forms</a>
     <h1>Hero Form</h1>
-    <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="heroForm">
       <div class="form-group">
         <label>Name</label>
         <input formControlName="name" class="form-control" id="name">
@@ -15,12 +15,14 @@
 
       <div class="form-group">
         <label>Hero Power</label>
-        <select formControlName="power" id="power">
+        <select class="form-control" formControlName="power" id="power">
           <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
         </select>
       </div>
 
-      <button type="submit" class="btn btn-success">Submit</button>
+      <button type="submit" class="btn btn-success" (click)="onSubmit()">Submit</button>
+      <button (click)="resetForm()" class="btn btn-cancel">Reset</button>
+
 
      <!-- NOT SHOWN IN DOCS -->
       <div>
