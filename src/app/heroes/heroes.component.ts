@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Hero } from '../hero';
+import { createHeroInputModel, Hero } from '../hero';
 import { HeroService } from '../hero.service';
 import { MessageService } from '../messages.service';
 
@@ -27,7 +27,7 @@ export class HeroesComponent implements OnInit {
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.heroService.addHero({ name } as Hero)
+    this.heroService.addHero({ name, powers: [] } as createHeroInputModel)
       .subscribe(hero => {
       this.heroes.push(hero);
     });

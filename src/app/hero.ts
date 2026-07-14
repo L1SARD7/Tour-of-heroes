@@ -6,3 +6,11 @@ export class Hero {
         public alterEgo?: string
     ) { }
 }
+
+export class createHeroInputModel {
+    constructor(
+        public name: string,
+        public powers: string[],
+        public alterEgo?: string
+    ) { }
+}

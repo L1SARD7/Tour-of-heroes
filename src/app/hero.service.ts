@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Hero } from './hero';
+import { createHeroInputModel, Hero } from './hero';
 import { MessageService } from './messages.service';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -31,10 +31,9 @@ export class HeroService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
-
-  private log(message: string) {
+    private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
-  }
+    }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -52,14 +51,13 @@ export class HeroService {
       tap(_ => this.log(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>('updateHero'))
     );
-
   }
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  addHero(hero: Hero): Observable<Hero> {
+  addHero(hero: createHeroInputModel): Observable<Hero> {
     return this.http.post<Hero>(`${this.apiUrl}/heroes/add-hero`, hero, this.httpOptions).pipe(
       tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
       catchError(this.handleError<Hero>('addHero'))

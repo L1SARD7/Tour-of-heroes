@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HeroService } from '../hero.service';
 
-import { Hero } from '../hero';
+import { createHeroInputModel, Hero } from '../hero';
 @Component({
   selector: 'app-hero-form-old',
   templateUrl: './hero-form-old.component.html',
@@ -56,7 +56,7 @@ export class HeroFormOldComponent {
   onSubmit() { this.submitted = true }
 
   newHero() { this.submitted = true;
-        this.heroService.addHero({ name: this.model.name, alterEgo: this.model.alterEgo, power: this.model.power } as Hero)
+        this.heroService.addHero({ name: this.model.name, alterEgo: this.model.alterEgo, powers: [this.model.power] } as createHeroInputModel)
           .subscribe(hero => {
           this.heroes.push(hero);
         })

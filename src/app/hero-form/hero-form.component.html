@@ -1,35 +1,66 @@
-<div class="container">
+<div class="container" id="form">
   <div [hidden]="submitted">
     <a routerLink="/hero-form-old">Template Driven Forms</a>
     <h1>Hero Form</h1>
     <form [formGroup]="heroForm">
       <div class="form-group">
         <label>Name</label>
-        <input formControlName="name" class="form-control" id="name">
+        <input formControlName="name" class="form-control" id="name" />
+        <p
+          *ngIf="!heroForm.controls.name.valid && heroForm.controls.name.touched"
+          class="text-danger"
+        >
+          {{ heroForm.controls.name.errors?.['required'] }}
+        </p>
       </div>
 
       <div class="form-group">
         <label>Alter Ego</label>
-        <input formControlName="alterEgo" class="form-control" id="alterEgo">
+        <input formControlName="alterEgo" class="form-control" id="alterEgo" />
+        <p
+          *ngIf="!heroForm.controls.alterEgo.valid && heroForm.controls.alterEgo.touched"
+          class="text-danger"
+        >
+          Alter Ego is required
+        </p>
       </div>
 
       <div class="form-group">
-        <label>Hero Power</label>
-        <select class="form-control" formControlName="power" id="power">
-          <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-        </select>
+        <label>Hero Powers</label>
+        <ng-container formArrayName="powers">
+          <ng-container *ngFor="let powerForm of powers.controls; let i = index">
+            <div class="power-form-row" [formGroupName]="i">
+              <select class="form-control" formControlName="power" id="powers">
+                <option *ngFor="let pow of avalaiblePowers" [value]="pow">{{ pow }}</option>
+              </select>
+              <select class="form-control" formControlName="level" id="powers">
+                <option *ngFor="let level of powerLevels" [value]="level">{{ level }}</option>
+              </select>
+              <button type="button" (click)="deletePower(i)" class="btn btn-cancel">Delete</button>
+            </div>
+          </ng-container>
+        </ng-container>
+        <p
+          *ngIf="!heroForm.controls.powers.valid && heroForm.controls.powers.touched"
+          class="text-danger"
+        >
+          Choose a power
+        </p>
+        <div>
+          <button type="button" (click)="addPower()" class="btn btn-success">Add Power</button>
+        </div>
       </div>
 
       <button type="submit" class="btn btn-success" (click)="onSubmit()">Submit</button>
       <button (click)="resetForm()" class="btn btn-cancel">Reset</button>
 
+      <p *ngIf="!isValid" class="text-danger">Please fill out all fields correctly.</p>
 
-     <!-- NOT SHOWN IN DOCS -->
       <div>
-        <hr>
-        Name via form.controls = {{showFormControls(heroForm)}}
+        <hr />
+        Name via form.controls = {{ showFormControls(heroForm) }}
       </div>
-     <!-- - -->
+      <!-- - -->
     </form>
   </div>
 
@@ -44,25 +75,28 @@
       <div class="col-xs-9">{{ heroForm.value.alterEgo }}</div>
     </div>
     <div class="row">
-      <div class="col-xs-3">Power</div>
-      <div class="col-xs-9">{{ heroForm.value.power }}</div>
+      <div class="col-xs-3">Powers</div>
+      <div class="col-xs-9">{{ heroForm.value.powers?.join(', ') }}</div>
     </div>
-    <br>
-    <button type="button" class="btn btn-primary" (click)="submitted=false">Edit</button>
-    <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">Create New Hero</button>
-    <button type="button" class="btn btn-cancel" (click)="submitted=false; heroForm.reset()">Cancel</button>
-
+    <br />
+    <button type="button" class="btn btn-primary" (click)="submitted = false">Edit</button>
+    <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">
+      Create New Hero
+    </button>
+    <button type="button" class="btn btn-cancel" (click)="submitted = false; heroForm.reset()">
+      Cancel
+    </button>
   </div>
 </div>
 
 <!-- ====================================================  -->
-<hr>
+<hr />
 <style>
   .no-style .ng-valid {
-  border-left: 1px  solid #CCC
-}
+    border-left: 1px solid #ccc;
+  }
 
   .no-style .ng-invalid {
-  border-left: 1px  solid #CCC
-}
+    border-left: 1px solid #ccc;
+  }
 </style>
