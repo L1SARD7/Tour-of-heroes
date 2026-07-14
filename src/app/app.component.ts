@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { throwIfEmpty } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,19 +11,24 @@ export class AppComponent {
   anotherStyle = 'dark'
   title = 'Tour of heroes';
 
-  onClick () {
-      console.log(this.currentStyle)
+  changeStyle() {
+    console.log(this.currentStyle);
+    let bootstrapLink = document.createElement('link');
+    bootstrapLink.rel = 'stylesheet';
+    bootstrapLink.href = './../assets/bootstrap-dark.css';
+    bootstrapLink.id = 'theme';
     if (this.currentStyle === 'default') {
-      this.currentStyle = 'dark'
-      this.anotherStyle = 'default'
-
-    } 
-    else {
-      this.currentStyle = 'default'
-      this.anotherStyle = 'dark'
+      this.currentStyle = 'dark';
+      this.anotherStyle = 'default';
+      document.head.appendChild(bootstrapLink);
+    } else {
+      this.currentStyle = 'default';
+      this.anotherStyle = 'dark';
+      const mode = document.getElementById('theme') || null;
+      mode?.remove();
     }
-
-      console.log(this.currentStyle)}
+    console.log(this.currentStyle);
+  }
 
   isShowActive = false
   actualDate = 0
