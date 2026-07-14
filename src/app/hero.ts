@@ -2,7 +2,7 @@ export class Hero {
     constructor(
         public id: number,
         public name: string,
-        public power: string,
+        public powers: { power: string, level: string }[],
         public alterEgo?: string
     ) { }
 }
@@ -10,7 +10,7 @@ export class Hero {
 export class createHeroInputModel {
     constructor(
         public name: string,
-        public powers: string[],
+        public powers: { power: string, level: string }[],
         public alterEgo?: string
     ) { }
 }

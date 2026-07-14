@@ -33,6 +33,14 @@ goBack(): void {
   this.location.back();
 }
 
+  deletePower(i: number) {
+    if (this.hero) {
+      this.hero.powers.splice(i, 1)
+          this.heroService.updateHero(this.hero)
+      .subscribe(() => this.goBack());
+    }
+    }
+
   save(): void {
     if (this.hero) {
     this.heroService.updateHero(this.hero)

@@ -24,7 +24,7 @@
         <label for="power">Hero Power</label>
         <select class="form-control" id="power"
                 required
-                [(ngModel)]="model.power" name="power"
+                [(ngModel)]="model.powers" name="power"
                 #power="ngModel">
           <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
         </select>
@@ -56,7 +56,7 @@
     </div>
     <div class="row">
       <div class="col-xs-3">Power</div>
-      <div class="col-xs-9">{{ model.power }}</div>
+      <div class="col-xs-9">{{ model.powers }}</div>
     </div>
     <br>
     <button type="button" class="btn btn-primary" (click)="submitted=false">Edit</button>

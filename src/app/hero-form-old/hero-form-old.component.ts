@@ -49,27 +49,19 @@ export class HeroFormOldComponent {
   powers = ['Really Smart', 'Super Flexible',
             'Super Hot', 'Weather Changer'];
 
-  model = new Hero(18, 'Dr. IQ', this.powers[0], 'Chuck Overstreet');
+  model = new Hero(18, 'Dr. IQ', [{ power: this.powers[0], level: 'beginner' }], 'Chuck Overstreet');
 
   submitted = false;
 
   onSubmit() { this.submitted = true }
 
   newHero() { this.submitted = true;
-        this.heroService.addHero({ name: this.model.name, alterEgo: this.model.alterEgo, powers: [this.model.power] } as createHeroInputModel)
+        this.heroService.addHero({ name: this.model.name, powers: [{ power: this.model.powers[0].power, level: 'beginner' }], alterEgo: this.model.alterEgo } as createHeroInputModel)
           .subscribe(hero => {
           this.heroes.push(hero);
         })
         this.submitted = false
    }
-
-  skyDog(): Hero {
-    const myHero =  new Hero(42, 'SkyDog',
-                           'Fetch any object at any distance',
-                           'Leslie Rollover');
-    console.log('My hero is called ' + myHero.name); 
-    return myHero;
-  }
 
   showFormControls(form: any) {
     return form && form.controls.name &&

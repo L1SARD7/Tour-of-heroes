@@ -3,7 +3,11 @@
   <h2>{{hero.name | uppercase}} Details</h2>
   <div>id: {{hero.id}}</div>
   <div>alter ego: {{hero.alterEgo}}</div>
-  <div>power: {{hero.power}}</div>
+    Powers: 
+    <div *ngFor="let power of hero.powers; let i = index">
+      <span>{{power.power}} ({{power.level}})</span>
+      <button type="button" class="btn btn-cancel" (click)="deletePower(i)">Delete</button>
+    </div>
   <div>
     <label for="hero-name">Hero name: </label>
     <input id="hero-name" [(ngModel)]="hero.name" placeholder="name">

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChange } from '@angular/core';
 import { MessageService } from '../messages.service';
 
 @Component({
@@ -12,6 +12,10 @@ export class MessagesComponent {
   logMessage() {
     console.log('log')
     this.logEvent.emit('log')
+  }
+
+  ngOnChanges(changes: any) {
+        console.log('Hero changed:', changes);
   }
   constructor(public messageService: MessageService) {}
 }
