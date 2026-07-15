@@ -10,7 +10,7 @@
           *ngIf="!heroForm.controls.name.valid && heroForm.controls.name.touched"
           class="text-danger"
         >
-          {{ heroForm.controls.name.errors?.["required"] }}
+          Name is required
         </p>
       </div>
 
@@ -76,16 +76,21 @@
     </div>
     <div class="row">
       <div class="col-xs-3">Powers</div>
-      <div class="col-xs-9">{{ heroForm.value.powers?.join(", ") }}</div>
+      <div class="col-xs-9">
+        <span *ngFor="let powerForm of powers.controls; let i = index">
+          {{ powerForm.value.power }} ({{ powerForm.value.level }})<span
+            *ngIf="i < powers.controls.length - 1"
+            >,
+          </span>
+        </span>
+      </div>
     </div>
     <br />
     <button type="button" class="btn btn-primary" (click)="submitted = false">Edit</button>
     <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">
       Create New Hero
     </button>
-    <button type="button" class="btn btn-cancel" (click)="submitted = false; heroForm.reset()">
-      Cancel
-    </button>
+    <button type="button" class="btn btn-cancel" (click)="submitted = false">Cancel</button>
   </div>
 </div>
 
