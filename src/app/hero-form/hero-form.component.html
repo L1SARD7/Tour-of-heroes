@@ -10,7 +10,7 @@
           *ngIf="!heroForm.controls.name.valid && heroForm.controls.name.touched"
           class="text-danger"
         >
-          {{ heroForm.controls.name.errors?.['required'] }}
+          {{ heroForm.controls.name.errors?.["required"] }}
         </p>
       </div>
 
@@ -26,7 +26,7 @@
       </div>
 
       <div class="form-group">
-        <label *ngIf="powers.length > 0" >Hero Powers</label>
+        <label *ngIf="powers.length > 0">Hero Powers</label>
         <ng-container formArrayName="powers">
           <ng-container *ngFor="let powerForm of powers.controls; let i = index">
             <div class="power-form-row" [formGroupName]="i">
@@ -76,7 +76,7 @@
     </div>
     <div class="row">
       <div class="col-xs-3">Powers</div>
-      <div class="col-xs-9">{{ heroForm.value.powers?.join(', ') }}</div>
+      <div class="col-xs-9">{{ heroForm.value.powers?.join(", ") }}</div>
     </div>
     <br />
     <button type="button" class="btn btn-primary" (click)="submitted = false">Edit</button>

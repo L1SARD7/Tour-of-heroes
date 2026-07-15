@@ -1,32 +1,31 @@
-import { Component, OnChanges, SimpleChange } from '@angular/core';
-import { HeroService } from '../hero.service';
+import { Component, OnChanges, SimpleChange } from "@angular/core";
+import { HeroService } from "../hero.service";
 
-import { createHeroInputModel, Hero } from '../hero';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { createHeroInputModel, Hero } from "../hero";
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'app-hero-form',
-  templateUrl: './hero-form.component.html',
-  styleUrls: ['./hero-form.component.less'],
+  selector: "app-hero-form",
+  templateUrl: "./hero-form.component.html",
+  styleUrls: ["./hero-form.component.less"],
 })
 export class HeroFormComponent {
-    
-    heroForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      alterEgo: ['', [Validators.required]],
-      powers: this.formBuilder.array([])
-    })
-    
-    constructor(
-      private heroService: HeroService,
-      private formBuilder: FormBuilder,
-    ) {}
-  
-    heroes: Hero[] = [];
+  heroForm = this.formBuilder.group({
+    name: ["", [Validators.required]],
+    alterEgo: ["", [Validators.required]],
+    powers: this.formBuilder.array([]),
+  });
+
+  constructor(
+    private heroService: HeroService,
+    private formBuilder: FormBuilder,
+  ) {}
+
+  heroes: Hero[] = [];
   private bootstrapLink?: HTMLLinkElement;
 
   ngOnInit() {
-    var newDiv = document.createElement('div');
+    var newDiv = document.createElement("div");
     newDiv.innerHTML = `<style>body {
     margin: 2em;
     margin-bottom: 32px;
@@ -45,9 +44,9 @@ export class HeroFormComponent {
     }
     </style>`;
     document.body.appendChild(newDiv);
-    this.bootstrapLink = document.createElement('link');
-    this.bootstrapLink.rel = 'stylesheet';
-    this.bootstrapLink.href = 'https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css';
+    this.bootstrapLink = document.createElement("link");
+    this.bootstrapLink.rel = "stylesheet";
+    this.bootstrapLink.href = "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css";
 
     document.head.appendChild(this.bootstrapLink);
   }
@@ -56,8 +55,8 @@ export class HeroFormComponent {
     this.heroForm.reset();
   }
 
-  avalaiblePowers = ['Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
-  powerLevels = ['beginner', 'medium', 'high']
+  avalaiblePowers = ["Really Smart", "Super Flexible", "Super Hot", "Weather Changer"];
+  powerLevels = ["beginner", "medium", "high"];
   isValid = true;
   submitted = false;
   onSubmit() {
@@ -71,16 +70,16 @@ export class HeroFormComponent {
   }
 
   get powers() {
-    return this.heroForm.get('powers') as FormArray;
+    return this.heroForm.get("powers") as FormArray;
   }
 
   addPower() {
-  let powerForm = this.formBuilder.group({
-    power: ['', [Validators.required]],
-    level: ['beginner', [Validators.required]]
-  })
-  this.powers.push(powerForm);
-}
+    let powerForm = this.formBuilder.group({
+      power: ["", [Validators.required]],
+      level: ["beginner", [Validators.required]],
+    });
+    this.powers.push(powerForm);
+  }
 
   deletePower(index: number) {
     this.powers.removeAt(index);

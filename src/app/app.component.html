@@ -1,14 +1,14 @@
 <div>
-    <h1>{{title}}</h1>
-    <nav>
-        <a routerLink="/dashboard">Dashboard</a>
-        <a routerLink="/heroes">Heroes</a>
-        <a routerLink="/hero-form">Hero Form</a>
-    </nav>
-    <button (click)="changeStyle()">Change to {{ anotherStyle }} theme</button>
-    <button (click)="showDate()">Show actual date</button>
-    <div *ngIf="isShowActive">{{ actualDate | date: 'medium' }}</div>
-    <router-outlet></router-outlet>
-    <app-messages [item]="currentItem" (logEvent)="getLogs($event)"></app-messages>
-    <div>{{ log }}</div>
+  <h1>{{ title }}</h1>
+  <nav>
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/heroes">Heroes</a>
+    <a routerLink="/hero-form">Hero Form</a>
+  </nav>
+  <button (click)="changeStyle()">Change to {{ anotherStyle }} theme</button>
+  <button (click)="showDate()">Show actual date</button>
+  <div *ngIf="isShowActive">{{ actualDate | date: "medium" }}</div>
+  <router-outlet></router-outlet>
+  <app-messages [item]="currentItem" (logEvent)="getLogs($event)"></app-messages>
+  <div>{{ log }}</div>
 </div>
