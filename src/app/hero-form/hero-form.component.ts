@@ -11,8 +11,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@ang
 })
 export class HeroFormComponent {
   heroForm = this.formBuilder.group({
-    name: ["", [Validators.required]],
-    alterEgo: ["", [Validators.required]],
+    name: ["", [Validators.required, Validators.minLength(2)]],
+    alterEgo: ["", [Validators.required, Validators.minLength(2)]],
     powers: this.formBuilder.array([]),
   });
 
@@ -59,12 +59,15 @@ export class HeroFormComponent {
   powerLevels = ["beginner", "medium", "high"];
   isValid = true;
   submitted = false;
+  errorMessage = ''
   onSubmit() {
+    this.isValid = true
     console.log(this.heroForm.controls);
     if (this.heroForm.valid) {
       this.isValid = true;
       this.submitted = true;
     } else {
+      this.errorMessage = this.getErrorMessage(this.heroForm.controls)
       this.isValid = false;
     }
   }
@@ -97,6 +100,14 @@ export class HeroFormComponent {
         this.heroes.push(hero);
       });
     this.submitted = false;
+  }
+
+  getErrorMessage(form: any) {
+    if (form.name.errors?.required) return 'Name is not entered, enter Name value'
+    if (form.name.errors?.minlength) return `Invalid Name, Name should be at least ${form.name.errors?.minlength.requiredLength} letters. You entered ${form.name.errors?.minlength.actualLength}`
+    if (form.alterEgo.errors) return 'Invalid Alter Ego, please enter correct value'
+    if (form.powers.errors) return 'Invalid entered powers, please enter correct value'
+    return ''
   }
 
   showFormControls(form: any) {

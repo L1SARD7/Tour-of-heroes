@@ -54,7 +54,7 @@
       <button type="submit" class="btn btn-success" (click)="onSubmit()">Submit</button>
       <button (click)="resetForm()" class="btn btn-cancel">Reset</button>
 
-      <p *ngIf="!isValid" class="text-danger">Please fill out all fields correctly.</p>
+      <p *ngIf="!isValid" class="text-danger">{{ errorMessage }}</p>
 
       <div>
         <hr />
