@@ -6,7 +6,7 @@
     <a routerLink="/hero-form">Hero Form</a>
   </nav>
   <button (click)="changeStyle()">Change to {{ anotherStyle }} theme</button>
-  <button (click)="showDate()">Show actual date</button>
+  <button (click)="showDate()">{{currentView}} actual date</button>
   <div *ngIf="isShowActive">{{ actualDate | date: "medium" }}</div>
   <router-outlet></router-outlet>
   <app-messages [item]="currentItem" (logEvent)="getLogs($event)"></app-messages>

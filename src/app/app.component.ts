@@ -32,14 +32,21 @@ export class AppComponent {
 
   isShowActive = false;
   actualDate = 0;
+  currentView = 'Show'
+  
   getDate() {
     return Date.now();
   }
 
   showDate() {
-    console.log(this.actualDate, this.isShowActive);
-    this.actualDate = this.getDate();
-    this.isShowActive = true;
+    if (this.isShowActive) {
+      this.currentView = 'Show'
+      this.isShowActive = false;
+    } else {
+      this.currentView = 'Hide'
+      this.actualDate = this.getDate();
+      this.isShowActive = true;
+    }
   }
 
   log!: string;
